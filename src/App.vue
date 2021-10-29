@@ -1,19 +1,39 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="container">
+    <h1>Carrito + Vue + Vanilla</h1>
+    <hr />
+    <div class="row">
+      <Card
+        v-for="producto in productos"
+        :key="producto.id"
+        :producto="producto"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Card from "@/components/Card.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Card,
+  },
+  mounted() {
+    this.$store.dispatch("fetchData");
+  },
+  computed: {
+    productos() {
+      return this.$store.state.productos;
+    },
+  },
+  watch: {
+    productos() {
+      console.log("Cambia valor", this.$store.state.productos);
+    },
+  },
+};
 </script>
 
 <style>
