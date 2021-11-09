@@ -2,6 +2,7 @@
   <div id="app" class="container">
     <h1>Carrito + Vue + Vanilla</h1>
     <hr />
+    <Carrito />
     <div class="row">
       <Card
         v-for="producto in productos"
@@ -14,11 +15,13 @@
 
 <script>
 import Card from "@/components/Card.vue";
+import Carrito from "@/components/Carrito.vue";
 
 export default {
   name: "App",
   components: {
     Card,
+    Carrito,
   },
   mounted() {
     this.$store.dispatch("fetchData");
@@ -27,11 +30,15 @@ export default {
     productos() {
       return this.$store.state.productos;
     },
+    carrito() {
+      return this.$store.state.carrito;
+    },
   },
   watch: {
     productos() {
       console.log("Cambia valor", this.$store.state.productos);
     },
+    carrito() {},
   },
 };
 </script>

@@ -11,7 +11,6 @@ export default new Vuex.Store({
   mutations: {
     setProducto(state, payload) {
       state.productos = payload;
-      console.log(state.productos);
     },
     setCarrito(state, payload) {
       state.carrito[payload.id] = payload;

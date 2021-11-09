@@ -24,6 +24,7 @@ export default {
   methods: {
     agregar(item) {
       console.log(item);
+      this.$store.dispatch("agregarAlCarrito", item);
     },
   },
 };
