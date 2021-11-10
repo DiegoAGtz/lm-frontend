@@ -34,4 +34,11 @@ export default new Vuex.Store({
     },
   },
   modules: {},
+  getters: {
+    totalCantidad(state) {
+      return Object.values(state.carrito).reduce(
+        (acc, { cantidad }) => acc + cantidad
+      );
+    },
+  },
 });

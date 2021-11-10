@@ -1,6 +1,6 @@
 <template>
   <div class="my-5">
-    <h4>Mi Carrito</h4>
+    <h4 class="text-center">Mi Carrito</h4>
     <table class="table">
       <thead>
         <tr>
@@ -11,7 +11,9 @@
           <th scope="col">Total</th>
         </tr>
       </thead>
-      <tbody id="items"></tbody>
+      <tbody id="items">
+        <Item v-for="item in carrito" :key="item.id" :item="item" />
+      </tbody>
       <tfoot>
         <tr id="footer-carrito">
           <th scope="row" colspan="5">Carrito Vacio - Compra Ya :'3</th>
@@ -22,5 +24,19 @@
 </template>
 
 <script>
-export default {};
+import Item from "./Item.vue";
+
+export default {
+  components: {
+    Item,
+  },
+  computed: {
+    carrito() {
+      return this.$store.state.carrito;
+    },
+  },
+  watch: {
+    carrito() {},
+  },
+};
 </script>

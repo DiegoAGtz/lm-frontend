@@ -1,7 +1,7 @@
 <template>
   <div>
     <th scope="row" colspan="2">Total de Productos</th>
-    <td>10</td>
+    <td>{{ totalCantidad }}</td>
     <td>
       <button class="btn btn-danger btn-sm" id="vaciar-carrito">
         Vaciar Carrito
@@ -12,5 +12,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    totalCantidad() {
+      return this.$store.getters.totalCantidad;
+    },
+  },
+};
 </script>
