@@ -14,22 +14,24 @@
       <tbody id="items">
         <Item v-for="item in carrito" :key="item.id" :item="item" />
       </tbody>
-      <tfoot>
-        <tr id="footer-carrito">
-          <th scope="row" colspan="5" v-if="Object.keys(carrito).length === 0">
-            Carrito Vacio - Compra Ya :'3
-          </th>
-          <Footer v-else />
-        </tr>
-      </tfoot>
     </table>
+    <div>
+      <div
+        class="fw-bolder fs-3"
+        scope="row"
+        colspan="5"
+        v-if="Object.keys(carrito).length === 0"
+      >
+        Carrito Vacio - Compra Ya :'3
+      </div>
+      <Footer v-else />
+    </div>
   </div>
 </template>
 
 <script>
 import Item from "./Item.vue";
 import Footer from "./Footer.vue";
-import { mapState } from "vuex";
 
 export default {
   components: {
@@ -37,7 +39,9 @@ export default {
     Footer,
   },
   computed: {
-    ...mapState(["carrito", "counter"]),
+    carrito() {
+      return this.$store.state.carrito;
+    },
   },
   watch: {
     carrito() {},

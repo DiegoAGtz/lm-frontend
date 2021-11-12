@@ -1,13 +1,18 @@
 <template>
   <div>
-    <th scope="row" colspan="2">Total de Productos</th>
-    <td>{{ totalCantidad }}</td>
-    <td>
-      <button class="btn btn-danger btn-sm" id="vaciar-carrito" @click="vaciar">
+    <div>
+      <span class="fw-bolder fs-3"
+        >Total de Productos: {{ totalCantidad }}</span
+      >
+    </div>
+    <div>
+      <span class="fw-bolder fs-3">Total a Pagar: ${{ totalPrecio }}</span>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-danger btn-md" id="vaciar-carrito" @click="vaciar">
         Vaciar Carrito
       </button>
-    </td>
-    <td class="font-weight-bold">$<span>5000</span></td>
+    </div>
   </div>
 </template>
 
@@ -18,7 +23,7 @@ export default {
       return this.$store.getters.totalCantidad;
     },
     totalPrecio() {
-      return this.$store.getter.totalPrecio;
+      return this.$store.getters.totalPrecio;
     },
   },
   methods: {

@@ -13,12 +13,8 @@ export default new Vuex.Store({
       state.productos = payload;
     },
     setCarrito(state, payload) {
-      if (state.carrito.hasOwnProperty(payload.id)) {
-        state.carrito[payload.id].cantidad++;
-      } else {
-        Vue.set(state.carrito, payload.id, payload);
-        Vue.set(state.carrito[payload.id], "cantidad", 1);
-      }
+      Vue.set(state.carrito, payload.id, payload);
+      Vue.set(state.carrito[payload.id], "cantidad", 1);
       console.log(state.carrito);
     },
     vaciarCarrito(state) {
@@ -45,19 +41,25 @@ export default new Vuex.Store({
       }
     },
     agregarAlCarrito({ commit, state }, producto) {
-      commit("setCarrito", producto);
+      if (state.carrito.hasOwnProperty(producto.id)) {
+        commit("aumentar", producto.id);
+      } else {
+        commit("setCarrito", producto);
+      }
     },
   },
   modules: {},
   getters: {
     totalCantidad(state) {
       return Object.values(state.carrito).reduce(
-        (acc, { cantidad }) => acc + cantidad
+        (acc, { cantidad }) => acc + cantidad,
+        0
       );
     },
     totalPrecio(state) {
       return Object.values(state.carrito).reduce(
-        (acc, { cantidad, precio }) => acc + cantidad * precio
+        (acc, { cantidad, precio }) => acc + cantidad * precio,
+        0
       );
     },
   },
