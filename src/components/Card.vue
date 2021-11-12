@@ -23,7 +23,6 @@ export default {
   props: ["producto"],
   methods: {
     agregar(item) {
-      console.log(item);
       this.$store.dispatch("agregarAlCarrito", item);
     },
   },

@@ -13,7 +13,25 @@ export default new Vuex.Store({
       state.productos = payload;
     },
     setCarrito(state, payload) {
-      state.carrito[payload.id] = payload;
+      if (state.carrito.hasOwnProperty(payload.id)) {
+        state.carrito[payload.id].cantidad++;
+      } else {
+        Vue.set(state.carrito, payload.id, payload);
+        Vue.set(state.carrito[payload.id], "cantidad", 1);
+      }
+      console.log(state.carrito);
+    },
+    vaciarCarrito(state) {
+      state.carrito = {};
+    },
+    aumentar(state, payload) {
+      state.carrito[payload].cantidad++;
+    },
+    disminuir(state, payload) {
+      state.carrito[payload].cantidad--;
+      if (state.carrito[payload].cantidad === 0) {
+        Vue.delete(state.carrito, payload);
+      }
     },
   },
   actions: {
@@ -27,9 +45,6 @@ export default new Vuex.Store({
       }
     },
     agregarAlCarrito({ commit, state }, producto) {
-      state.carrito.hasOwnProperty(producto.id)
-        ? (producto.cantidad = state.carrito[producto.id].cantidad + 1)
-        : (producto.cantidad = 1);
       commit("setCarrito", producto);
     },
   },
@@ -38,6 +53,11 @@ export default new Vuex.Store({
     totalCantidad(state) {
       return Object.values(state.carrito).reduce(
         (acc, { cantidad }) => acc + cantidad
+      );
+    },
+    totalPrecio(state) {
+      return Object.values(state.carrito).reduce(
+        (acc, { cantidad, precio }) => acc + cantidad * precio
       );
     },
   },

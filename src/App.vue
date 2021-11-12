@@ -35,9 +35,7 @@ export default {
     },
   },
   watch: {
-    productos() {
-      console.log("Cambia valor", this.$store.state.productos);
-    },
+    productos() {},
     carrito() {},
   },
 };

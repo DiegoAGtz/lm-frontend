@@ -16,7 +16,10 @@
       </tbody>
       <tfoot>
         <tr id="footer-carrito">
-          <th scope="row" colspan="5">Carrito Vacio - Compra Ya :'3</th>
+          <th scope="row" colspan="5" v-if="Object.keys(carrito).length === 0">
+            Carrito Vacio - Compra Ya :'3
+          </th>
+          <Footer v-else />
         </tr>
       </tfoot>
     </table>
@@ -25,15 +28,16 @@
 
 <script>
 import Item from "./Item.vue";
+import Footer from "./Footer.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
     Item,
+    Footer,
   },
   computed: {
-    carrito() {
-      return this.$store.state.carrito;
-    },
+    ...mapState(["carrito", "counter"]),
   },
   watch: {
     carrito() {},
