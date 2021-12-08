@@ -15,7 +15,6 @@ export default new Vuex.Store({
     setCarrito(state, payload) {
       Vue.set(state.carrito, payload.id, payload);
       Vue.set(state.carrito[payload.id], "cantidad", 1);
-      console.log(state.carrito);
     },
     vaciarCarrito(state) {
       state.carrito = {};
